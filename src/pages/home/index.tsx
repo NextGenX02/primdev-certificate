@@ -8,7 +8,7 @@ import { useMetaMask } from '@/hooks/useMetaMask';
 import { CertificateManager__factory } from '@/contract-types';
 import { CertificateContract, Validity } from '@/models/CertificateContract';
 import './index.scss';
-import { getContractConfig } from '@/contract-config';
+import { getContractConfig } from '@/contract-config'; // <-- contract configuration
 
 interface FormValues {
   code: string;
@@ -30,6 +30,8 @@ const Home: FC = () => {
   const config = getContractConfig(provider);
 
   if (error) {
+    // If error is accoured from metaMask (witches is a crypto wallet)
+    // then request the user to install it
     return (
       <div className="Home__error">
         <Result
@@ -53,7 +55,9 @@ const Home: FC = () => {
   }
 
   if (!provider) return <Loader />;
-
+// THE BEGINNING OF THE PROBLEM
+  // if we don't get any blockchain addresses then throw an error
+  // this network is not support (from this we need to check to file that handle this configuration)
   if (!config?.address) {
     return (
       <div className="Home__error">

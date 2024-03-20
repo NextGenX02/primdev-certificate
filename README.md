@@ -23,41 +23,47 @@
 npm install
 ```
 
-2. Because this project uses Firebase, you need to [config Firebase](https://firebase.google.com/docs/web/setup) first. Copy firebase config example and fill it with your configuration :
+2. Because this project uses Firebase, you need to [config Firebase](https://firebase.google.com/docs/web/setup) first. Copy firebase config example and fill it with your configuration (if you don't know how to get your configuration just search on youtube ***how to setup a firebase project***):
 
 ```bash
-cp src/firebase-config.example.json src/firebase-config.json
+cp src/firebase-config.json src/firebase-config.json
 ```
 
 ## Development
 
-If you want to run this project on your development machine, here's how:
+To run this project in your development environment please follow this steps:
 
 1. Run Hardhat network first :
 
 ```bash
 npx hardhat node
 ```
+Note:If you get output where the JSON-RPC server running on this address ***::1***<br> Please use --hostname argument to set the hardhat to use ipv4
+```bash
+npx hardhat node --hostname 127.0.0.1
+```
 
-2. On other terminal, deploy smart contract on the network :
+2. Open the seconds terminal and run this command below to deploy smart contract on the network :
 
 ```bash
 npx hardhat run smart-contract/scripts/deploy.ts --network localhost
 ```
 
-3. Create `.env` based on `.env.example` :
+3. Rename .env.example to .env or you can just use cp command :
 
 ```bash
 cp .env.example .env
 ```
 
-4. Change SNOWPACK_PUBLIC_CONTRACT_ADDRESS_LOCAL on `.env` based on address returned by the deploy script.
+4. Change SNOWPACK_PUBLIC_CONTRACT_ADDRESS_LOCAL on `.env` based on address returned by the deploy script.<br>
+the ***SNOWPACK_PUBLIC_CONTRACT_ADDRESS_LOCAL*** is basically the account address from hardhat RPC
 
-5. Run the Web App. Make sure the Hardhat network still running. In conclusion, you need two terminals to run this project. One for Hardhat network, and one for the Web App :
+5. Make sure the terminal **(1)** is still running and then on the other terminal type this command:
 
 ```bash
 npm start
 ```
+In the end you have 2 terminal 1 for running the hardhat server and other to run the web server
 
 ## Available Scripts
 
